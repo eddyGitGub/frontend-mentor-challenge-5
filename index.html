@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Frontend Mentor | Base Apparel coming soon page</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset & Base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Josefin Sans', sans-serif;
+      color: hsl(0, 6%, 24%);
+      background: linear-gradient(135deg, hsl(0, 0%, 100%), hsl(0, 100%, 98%));
+      min-height: 100vh;
+    }
+
+    /* Container Layout */
+    .container { display: flex; flex-direction: column; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; text-align: center; }
+    .illustration { width: 100%; max-height: 300px; object-fit: cover; }
+
+    /* Logo */
+    .logo { margin-bottom: 2rem; }
+    .logo svg circle { fill: hsl(0, 36%, 70%); }
+    .logo svg text {
+      fill: hsl(0, 6%, 24%);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 2rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: hsl(0, 6%, 24%);
+    }
+    h1 span {
+      display: block;
+      font-weight: 600;
+      font-size: 2.5rem;
+      letter-spacing: 0.3em;
+      margin-top: 0.5rem;
+    }
+    p {
+      font-size: 1rem;
+      max-width: 330px;
+      margin: 1.5rem 0;
+      line-height: 1.5;
+      color: hsl(0, 6%, 24%);
+    }
+
+    /* Form */
+    .form { position: relative; width: 100%; max-width: 330px; }
+    .form input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 30px;
+      border: 1px solid hsl(0, 6%, 24%);
+      font-size: 1rem;
+      color: hsl(0, 6%, 24%);
+    }
+    .form input::placeholder { color: hsl(0, 6%, 24%); }
+    .form button {
+      position: absolute;
+      top: 50%;
+      right: 0.5rem;
+      transform: translateY(-50%);
+      width: 3rem;
+      height: 3rem;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, hsl(0, 80%, 86%), hsl(0, 74%, 74%));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .form button:hover {
+      background: hsl(0, 93%, 68%);
+    }
+    .form button img { width: 1rem; }
+
+    /* Error State */
+    .form.error input { border-color: hsl(0, 93%, 68%); }
+    .error-icon {
+      position: absolute;
+      top: 50%;
+      left: 0.75rem;
+      transform: translateY(-50%);
+      width: 1rem;
+    }
+    .error-text {
+      color: hsl(0, 93%, 68%);
+      font-size: 0.8rem;
+      text-align: left;
+      margin-top: 0.5rem;
+    }
+
+    /* Attribution */
+    .attribution {
+      font-size: 0.75rem;
+      margin-top: 2rem;
+      color: hsl(0, 6%, 24%);
+    }
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+      text-decoration: none;
+    }
+
+    /* Desktop Styles */
+    @media (min-width: 768px) {
+      .container { flex-direction: row; }
+      .main, .illustration-container { flex: 1; }
+      .main { align-items: flex-start; text-align: left; padding: 4rem; }
+      .illustration-container { display: flex; }
+      .illustration { width: 100%; height: auto; max-height: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <main class="main">
+      <div class="logo">
+        <svg width="100" height="24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" />
+          <text x="30" y="17">BASE APPAREL</text>
+        </svg>
+      </div>
+
+      <h1>WE'RE <span>COMING SOON</span></h1>
+      <p>Hello fellow shoppers! We're currently building our new fashion store. Add your email below to stay up-to-date with announcements and our launch deals.</p>
+
+      <form class="form" novalidate>
+        <input type="email" placeholder="Email Address" required>
+        <img src="./images/icon-error.svg" alt="error icon" class="error-icon" hidden>
+        <button type="submit"><img src="./images/icon-arrow.svg" alt="arrow icon"></button>
+        <p class="error-text" hidden>Please provide a valid email</p>
+      </form>
+
+      <p class="attribution">Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#">Your Name Here</a>.</p>
+    </main>
+
+    <div class="illustration-container">
+      <picture>
+        <source media="(min-width:768px)" srcset="./images/hero-desktop.jpg">
+        <source media="(max-width:767px)" srcset="./images/hero-desktop.jpg">
+        <img src="./images/hero-desktop.jpg" alt="Model wearing orange shirt" class="illustration">
+      </picture>
+    </div>
+  </div>
+
+  <script>
+    const form = document.querySelector('.form');
+    const input = form.querySelector('input');
+    const errorIcon = form.querySelector('.error-icon');
+    const errorText = form.querySelector('.error-text');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = input.value.trim();
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!email || !valid) {
+        form.classList.add('error');
+        errorIcon.hidden = false;
+        errorText.hidden = false;
+      } else {
+        form.classList.remove('error');
+        errorIcon.hidden = true;
+        errorText.hidden = true;
+        form.reset();
+        alert('Thank you for subscribing!');
+      }
+    });
+  </script>
+</body>
+</html>
